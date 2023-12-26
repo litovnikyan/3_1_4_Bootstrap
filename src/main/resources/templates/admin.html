@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+</head>
+<body>
+<h1 Страница администратора></h1>
+<div>
+
+   <h4><a href="/admin/all-users">Все пользователи</a></h4>
+    <h4><a href="/user">Личная информация</a></h4>
+</div>
+
+<br>
+<br>
+<form th:action="@{/logout}" th:method="POST">
+    <input type="submit" value="Logout" />
+</body>
+</html>

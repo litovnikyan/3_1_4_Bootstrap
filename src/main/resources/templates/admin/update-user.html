@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update userr</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/admin/update-user}" th:object="${user}">
+    <br>
+    <input type="hidden" th:field="*{id}" />
+    <br>
+    <label for="username">Имя пользователя: </label>
+    <input type="text" th:field="*{username}" th:value="${user.getSurname()}"  id="username">
+    <br>
+    <label for="password">Пароль: </label>
+    <input type="password" th:field="*{password}" minlength="1" required id="password">
+    <br>
+    <label for="name">Имя: </label>
+    <input type="text" th:field="*{name}" th:value="${user.getName()}" id="name">
+    <br>
+    <label for="surname">Фамилия: </label>
+    <input type="text" th:field="*{surname}" th:value="${user.getSurname()}" id="surname">
+    <br>
+    <label for="age">Возраст: </label>
+    <input type="text" th:field="*{age}" th:value="${user.getAge()}" id="age">
+    <br>
+    <div>
+        <label for="role">Role:</label>
+        <div>
+            <input type="checkbox" id="userRole" name="role" value="ROLE_USER"/>
+            <label for="userRole">User</label>
+        </div>
+        <div>
+            <input type="checkbox" id="adminRole" name="role" value="ROLE_ADMIN"/>
+            <label for="adminRole">Admin</label>
+        </div>
+
+<!--    <br>-->
+<!--    <label for="roles">Роли: </label>-->
+<!--    <select th:field="*{roleSet}" id="roles" multiple="multiple">-->
+<!--        <option value="user" th:selected="${user.getRoleSet() =='ROLE_USER'}">User</option>-->
+<!--        <option value="admin" th:selected="${user.getRoleSet() =='ROLE_ADMIN'}">Admin</option>-->
+<!--    </select>-->
+
+<!--    <br>-->
+<!--    <label for="roles">Роль:</label>-->
+<!--    <select  id="roles" name="checkRoles">-->
+<!--        <option selected = "selected">USER</option>-->
+<!--        <option>ADMIN</option>-->
+<!--    </select>-->
+
+    <input type="submit" value="Сохранить"/>
+</form>
+<!--<form th:method="POST" th:action="@{/admin/update-user}" th:object="${user}">-->
+
+<!--    <input hidden="hidden" type="number" th:field="*{id}" id="idAdd" placeholder="id">-->
+
+<!--    <input hidden="hidden" type="text" th:field="${user.username}" id="username"/>-->
+<!--    <br>-->
+<!--    <input hidden="hidden" type="text" th:field="${user.password}" id="password"/>-->
+<!--    <br>-->
+<!--    <input hidden="hidden" type="text" th:field="${user.roleSet}" id="role"/>-->
+
+<!--    <br>-->
+
+<!--    <label for="name">Name</label>-->
+<!--    <input type="text" th:field="*{name}" id="name"/>-->
+
+<!--    <br>-->
+
+<!--    <label for="surname">Surname</label>-->
+<!--    <input type="text" th:field="*{surname}" id="surname"/>-->
+
+<!--    <br>-->
+
+<!--    <label for="age">Age</label>-->
+<!--    <input type="text" th:field="*{age}" id="age"/>-->
+
+<!--    <br>-->
+
+<!--    <input type="submit" value="OK">-->
+
+<!--</form>-->
+
+</body>
+</html>
