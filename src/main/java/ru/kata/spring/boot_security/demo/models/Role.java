@@ -11,7 +11,7 @@ import javax.persistence.Column;
 
 @Entity
 @Table(name="roles")
-public class Role implements GrantedAuthority {
+public class Role{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
@@ -48,8 +48,4 @@ public class Role implements GrantedAuthority {
     }
 
 
-    @Override
-    public String getAuthority() {
-        return name;
-    }
 }

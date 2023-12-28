@@ -27,13 +27,13 @@ public class UserServiceImp implements UserService{
     }
 
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository.findByEmail(username);
     }
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User byUsername = userRepository.findByUsername(username);
+        User byUsername = userRepository.findByEmail(username);
         if (byUsername == null) {
             throw new UsernameNotFoundException("User not found");
         }

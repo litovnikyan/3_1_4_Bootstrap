@@ -25,7 +25,7 @@ public class UserValidator implements Validator {
     public void validate(Object target, Errors errors) {
         User user = (User) target;
         try {
-        userServiceImp.loadUserByUsername(user.getUsername());
+        userServiceImp.loadUserByUsername(user.getFirstName());
         }catch (UsernameNotFoundException ignored) {
             return;
         }

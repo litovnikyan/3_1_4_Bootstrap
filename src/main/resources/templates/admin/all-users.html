@@ -18,21 +18,19 @@
     </tr>
     <tr th:each="user : ${allUsers}">
         <td th:text="${user.id}"></td>
-        <td th:text="${user.username}"></td>
+        <td th:text="${user.firstName}"></td>
         <td th:text="${user.password}"></td>
         <td th:text="${user.roleSet}"></td>
-        <td th:text="${user.name}"></td>
-        <td th:text="${user.surname}"></td>
+        <td th:text="${user.lastName}"></td>
+        <td th:text="${user.email}"></td>
         <td th:text="${user.age}"></td>
         <td>
-<!--            <a th:href="@{/admin/update-user(id=${user.id})}"> Изменить данные   </a>-->
             <form th:action="@{/admin/update-user}" th:method="GET">
                 <input type="hidden" name="id" th:value="${user.getId()}">
                 <button type="submit">Изменить данные</button>
             </form>
         </td>
         <td>
-<!--            <a th:href="@{/admin/delete-user(id=${user.id})}"> Удалить пользователя  </a>-->
             <form th:action="@{/admin/delete-user}" th:method="POST">
                 <input type="hidden" name="id" th:value="${user.getId()}">
                 <button type="submit">Удалить</button>

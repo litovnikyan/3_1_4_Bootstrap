@@ -25,17 +25,16 @@ public class User {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @Column(name = "username")
-    private String username;
-    @Column(name = "password")
-    private String password;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "surname")
-    private String surname;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
     @Column(name = "age")
     private int age;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "password")
+    private String password;
     @Fetch(FetchMode.JOIN)
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -47,11 +46,11 @@ public class User {
     }
 
     public User(String username, int yearOfBirth, String password, String name, String surname) {
-        this.username = username;
+        this.firstName = username;
         this.age = yearOfBirth;
         this.password = password;
-        this.name = name;
-        this.surname = surname;
+        this.lastName = name;
+        this.email = surname;
     }
 
     public int getId() {
@@ -62,12 +61,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFirstName(String username) {
+        this.firstName = username;
     }
 
     public int getAge() {
@@ -86,20 +85,20 @@ public class User {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLastName(String name) {
+        this.lastName = name;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setEmail(String surname) {
+        this.email = surname;
     }
 
     public Set<Role> getRoleSet() {
@@ -119,8 +118,8 @@ public class User {
     public String toString() {
         return "User{" +
                 "age=" + age +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
+                ", name='" + lastName + '\'' +
+                ", surname='" + email + '\'' +
                 '}';
     }
 }

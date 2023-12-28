@@ -1,11 +1,12 @@
 package ru.kata.spring.boot_security.demo.security;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.transaction.annotation.Transactional;
+import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.models.User;
 
-import java.util.Collection;
+import java.util.*;
 
 //в этом классе обертке реализуем интерфейс UserDetails
 public class MyUserDetails implements UserDetails {
@@ -15,13 +16,14 @@ public class MyUserDetails implements UserDetails {
         this.user = user;
     }
 
-
-
     @Override
-    @Transactional(readOnly = true)
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
-        return user.getRoleSet();
+        // Преобразует объекты Role в объекты GrantedAuthority
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        for (Role role : user.getRoleSet()) {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+        return authorities;
     }
 
     @Override
@@ -31,7 +33,7 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.user.getUsername();
+        return this.user.getFirstName();
     }
 
     @Override
