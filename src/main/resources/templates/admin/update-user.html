@@ -11,7 +11,7 @@
     <input type="hidden" th:field="*{id}" />
     <br>
     <label for="firstName">Имя пользователя: </label>
-    <input type="text" th:field="*{firstName}" th:value="${user.getFirstName()}" id="firstName">
+    <input type="text" th:field="*{username}" th:value="${user.getUsername()}" id="firstName">
     <br>
     <label for="password">Пароль: </label>
     <input type="password" th:field="*{password}" minlength="1" required id="password">

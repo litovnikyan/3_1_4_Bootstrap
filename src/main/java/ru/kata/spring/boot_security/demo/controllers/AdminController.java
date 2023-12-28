@@ -7,6 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.models.User;
+import ru.kata.spring.boot_security.demo.repositories.RoleRepository;
 import ru.kata.spring.boot_security.demo.services.RegistrationService;
 import ru.kata.spring.boot_security.demo.services.UserService;
 import ru.kata.spring.boot_security.demo.util.UserValidator;
@@ -22,12 +23,14 @@ public class AdminController {
     private UserValidator userValidator;
     private RegistrationService registrationService;
     private UserService userService;
+    private RoleRepository repository;
 
     @Autowired
-    public AdminController(UserValidator userValidator, RegistrationService registrationService, UserService userService) {
+    public AdminController(UserValidator userValidator, RegistrationService registrationService, UserService userService, RoleRepository repository) {
         this.userValidator = userValidator;
         this.registrationService = registrationService;
         this.userService = userService;
+        this.repository = repository;
     }
 
     @GetMapping
@@ -43,17 +46,18 @@ public class AdminController {
     @GetMapping("/add-user")
     public String registrationPage(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("roles", userService.getAllRoles());
         return "admin/add-user";
     }
     @PostMapping("/add-user")
-    public String performRegistration(@ModelAttribute("user")@Valid User user, BindingResult bindingResult, String[] role) {
+    public String performRegistration(@ModelAttribute("user")@Valid User user, BindingResult bindingResult, @RequestParam("checkRoles") String[] role) {
         userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
             return "/admin/add-user";
         }
         Set<Role> rs = new HashSet<>();
         for (String s : role) {
-            rs.add(new Role(s));
+            rs.add(repository.findRoleByName("ROLE_" + s));
         }
         user.setRoleSet(rs);
         registrationService.register(user);

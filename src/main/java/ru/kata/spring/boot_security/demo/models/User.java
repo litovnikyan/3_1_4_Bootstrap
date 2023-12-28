@@ -26,7 +26,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "first_name")
-    private String firstName;
+    private String username;
     @Column(name = "last_name")
     private String lastName;
     @Column(name = "age")
@@ -36,7 +36,7 @@ public class User {
     @Column(name = "password")
     private String password;
     @Fetch(FetchMode.JOIN)
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -46,7 +46,7 @@ public class User {
     }
 
     public User(String username, int yearOfBirth, String password, String name, String surname) {
-        this.firstName = username;
+        this.username = username;
         this.age = yearOfBirth;
         this.password = password;
         this.lastName = name;
@@ -61,12 +61,12 @@ public class User {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setFirstName(String username) {
-        this.firstName = username;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getAge() {

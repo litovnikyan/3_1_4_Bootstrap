@@ -21,6 +21,5 @@ public class RegistrationService {
     public void register(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-
     }
 }
