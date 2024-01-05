@@ -1,5 +1,6 @@
-package ru.kata.spring.boot_security.demo.configs;
+package ru.kata.spring.boot_security.demo.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -7,24 +8,24 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ru.kata.spring.boot_security.demo.services.UserServiceImp;
+import ru.kata.spring.boot_security.demo.security.MyUserDetailsServiceImp;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private final UserServiceImp userServiceImp;
+    private final MyUserDetailsServiceImp myUserDetailsService;
     private final SuccessUserHandler successUserHandler;
 
-    public WebSecurityConfig(UserServiceImp personDetailsService, SuccessUserHandler successUserHandler) {
-        this.userServiceImp = personDetailsService;
+    @Autowired
+    public WebSecurityConfig(MyUserDetailsServiceImp myUserDetailsService, SuccessUserHandler successUserHandler) {
+        this.myUserDetailsService = myUserDetailsService;
         this.successUserHandler = successUserHandler;
     }
-
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setPasswordEncoder(getPasswordEncoder());
-        authenticationProvider.setUserDetailsService(userServiceImp);
+        authenticationProvider.setUserDetailsService(myUserDetailsService);
         return authenticationProvider;
     }
 
@@ -36,20 +37,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/auth/login", "/auth/registration", "/error").permitAll()
-                .anyRequest().hasAnyRole("USER", "ADMIN")
+                .antMatchers("/", "/hello")
+                .permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
                 .and()
                 .formLogin()
-                .loginPage("/auth/login")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .loginPage("/login")
                 .loginProcessingUrl("/process_login")
-                .failureUrl("/auth/login?error")
                 .successHandler(successUserHandler)
                 .permitAll()
                 .and()
                 .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/auth/login");
+                .logoutSuccessUrl("/")
+                .permitAll();
     }
 }
