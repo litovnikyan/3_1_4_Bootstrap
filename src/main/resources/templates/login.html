@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="ru" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+
+        .form form {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            padding-top: 10px;
+        }
+
+        .wider-button {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<div class="form">
+    <form class="form-horizontal" role="form" method="POST" action="/process_login">
+        <br>
+        <br>
+        <h2 class="font-weight-bold">Please sign in</h2>
+        <div class="form-group">
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="Email" name="email">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" placeholder="Password" name="password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary btn-block wider-button">Sign in</button>
+                    <div th:if="${param.error}" style="color: red">
+                        Invalid Email or Password
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+<!--<!doctype html>-->
+<!--<html lang="ru" xmlns:th="https://www.thymeleaf.org">-->
+
+<!--<head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--    <title>Login page</title>-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"-->
+<!--          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">-->
+<!--    <style>-->
+
+<!--        .form form {-->
+<!--            width: 100%;-->
+<!--            max-width: 400px;-->
+<!--            margin: 0 auto;-->
+<!--            padding-top: 10px;-->
+<!--        }-->
+
+<!--        .wider-button {-->
+<!--            width: 100%;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<div class="form">-->
+<!--    <form class="form-horizontal" role="form" method="POST" action="/process_login">-->
+<!--        <br>-->
+<!--        <br>-->
+<!--        <h2 class="font-weight-bold">Please sign in</h2>-->
+<!--        <div class="form-group">-->
+<!--            <div class="form-group">-->
+<!--                <div class="col-sm-10">-->
+<!--                    <input type="email" class="form-control" placeholder="Email" name="email">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <div class="col-sm-10">-->
+<!--                    <input type="password" class="form-control" placeholder="Password" name="password">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <div class="col-sm-offset-2 col-sm-10">-->
+<!--                    <button type="submit" class="btn btn-primary btn-block wider-button">Sign in</button>-->
+<!--                    <div th:if="${param.error}" style="color: red">-->
+<!--                        Invalid Email or Password-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"-->
+<!--        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"-->
+<!--        crossorigin="anonymous"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="ru" data-bs-theme="light">-->
+<!--<head>-->
+<!--    <script src="/docs/5.3/assets/js/color-modes.js"></script>-->
+
+<!--    <meta charset="utf-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--    <title>Login page</title>-->
+
+<!--    <link rel="canonical" href="https://bootstrap-4.ru/docs/5.3/examples/sign-in/">-->
+
+<!--    &lt;!&ndash; Bootstrap core CSS &ndash;&gt;-->
+<!--    <link href="/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet"-->
+<!--          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">-->
+
+<!--    &lt;!&ndash; Favicons &ndash;&gt;-->
+<!--    <link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">-->
+<!--    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">-->
+<!--    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">-->
+<!--    <link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json">-->
+<!--    <link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">-->
+<!--    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">-->
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"-->
+<!--          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+<!--    <meta name="theme-color" content="#712cf9">-->
+
+
+<!--&lt;!&ndash;    <style>&ndash;&gt;-->
+<!--&lt;!&ndash;        .bd-placeholder-img {&ndash;&gt;-->
+<!--&lt;!&ndash;            font-size: 1.125rem;&ndash;&gt;-->
+<!--&lt;!&ndash;            text-anchor: middle;&ndash;&gt;-->
+<!--&lt;!&ndash;            -webkit-user-select: none;&ndash;&gt;-->
+<!--&lt;!&ndash;            -moz-user-select: none;&ndash;&gt;-->
+<!--&lt;!&ndash;            user-select: none;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        @media (min-width: 768px) {&ndash;&gt;-->
+<!--&lt;!&ndash;            .bd-placeholder-img-lg {&ndash;&gt;-->
+<!--&lt;!&ndash;                font-size: 3.5rem;&ndash;&gt;-->
+<!--&lt;!&ndash;            }&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        .b-example-divider {&ndash;&gt;-->
+<!--&lt;!&ndash;            width: 100%;&ndash;&gt;-->
+<!--&lt;!&ndash;            height: 3rem;&ndash;&gt;-->
+<!--&lt;!&ndash;            background-color: rgba(0, 0, 0, .1);&ndash;&gt;-->
+<!--&lt;!&ndash;            border: solid rgba(0, 0, 0, .15);&ndash;&gt;-->
+<!--&lt;!&ndash;            border-width: 1px 0;&ndash;&gt;-->
+<!--&lt;!&ndash;            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        .b-example-vr {&ndash;&gt;-->
+<!--&lt;!&ndash;            flex-shrink: 0;&ndash;&gt;-->
+<!--&lt;!&ndash;            width: 1.5rem;&ndash;&gt;-->
+<!--&lt;!&ndash;            height: 100vh;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        .bi {&ndash;&gt;-->
+<!--&lt;!&ndash;            vertical-align: -.125em;&ndash;&gt;-->
+<!--&lt;!&ndash;            fill: currentColor;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        .nav-scroller {&ndash;&gt;-->
+<!--&lt;!&ndash;            position: relative;&ndash;&gt;-->
+<!--&lt;!&ndash;            z-index: 2;&ndash;&gt;-->
+<!--&lt;!&ndash;            height: 2.75rem;&ndash;&gt;-->
+<!--&lt;!&ndash;            overflow-y: hidden;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        .nav-scroller .nav {&ndash;&gt;-->
+<!--&lt;!&ndash;            display: flex;&ndash;&gt;-->
+<!--&lt;!&ndash;            flex-wrap: nowrap;&ndash;&gt;-->
+<!--&lt;!&ndash;            padding-bottom: 1rem;&ndash;&gt;-->
+<!--&lt;!&ndash;            margin-top: -1px;&ndash;&gt;-->
+<!--&lt;!&ndash;            overflow-x: auto;&ndash;&gt;-->
+<!--&lt;!&ndash;            text-align: center;&ndash;&gt;-->
+<!--&lt;!&ndash;            white-space: nowrap;&ndash;&gt;-->
+<!--&lt;!&ndash;            -webkit-overflow-scrolling: touch;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        .btn-bd-primary {&ndash;&gt;-->
+<!--&lt;!&ndash;            &#45;&#45;bd-violet-bg: #712cf9;&ndash;&gt;-->
+<!--&lt;!&ndash;            &#45;&#45;bd-violet-rgb: 112.520718, 44.062154, 249.437846;&ndash;&gt;-->
+
+<!--&lt;!&ndash;            &#45;&#45;bs-btn-font-weight: 600;&ndash;&gt;-->
+<!--&lt;!&ndash;            &#45;&#45;bs-btn-color: var(&#45;&#45;bs-white);&ndash;&gt;-->
+<!--&lt;!&ndash;            &#45;&#45;bs-btn-bg: var(&#45;&#45;bd-violet-bg);&ndash;&gt;-->
+<!--&lt;!&ndash;            &#45;&#45;bs-btn-border-color: var(&#45;&#45;bd-violet-bg);&ndash;&gt;-->
+<!--&lt;!&ndash;            &#45;&#45;bs-btn-hover-color: var(&#45;&#45;bs-white);&ndash;&gt;-->
+<!--&lt;!&ndash;            &#45;&#45;bs-btn-hover-bg: #6528e0;&ndash;&gt;-->
+<!--&lt;!&ndash;            &#45;&#45;bs-btn-hover-border-color: #6528e0;&ndash;&gt;-->
+<!--&lt;!&ndash;            &#45;&#45;bs-btn-focus-shadow-rgb: var(&#45;&#45;bd-violet-rgb);&ndash;&gt;-->
+<!--&lt;!&ndash;            &#45;&#45;bs-btn-active-color: var(&#45;&#45;bs-btn-hover-color);&ndash;&gt;-->
+<!--&lt;!&ndash;            &#45;&#45;bs-btn-active-bg: #5a23c8;&ndash;&gt;-->
+<!--&lt;!&ndash;            &#45;&#45;bs-btn-active-border-color: #5a23c8;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        .bd-mode-toggle {&ndash;&gt;-->
+<!--&lt;!&ndash;            z-index: 1500;&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;    </style>&ndash;&gt;-->
+
+<!--    <main class="form-signin w-25 m-auto">-->
+<!--        <form method="POST" action="/process_login">-->
+<!--            <br/>-->
+<!--            <br/>-->
+<!--            <br/>-->
+<!--            <h1 class="h3 mb-3 fw-normal"><b>Please sign in</b></h1>-->
+<!--            <div class="form-floating">-->
+<!--                <input type="text" class="form-control" id="floatingInput" placeholder="Email address">-->
+<!--            </div>-->
+<!--            <div class="form-floating">-->
+<!--                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">-->
+<!--            </div>-->
+<!--            <br>-->
+<!--            <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>-->
+<!--        </form>-->
+<!--    </main>-->
+
+<!--    <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js"-->
+<!--            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"-->
+<!--            crossorigin="anonymous"></script>-->
+<!--    </body>-->
+<!--&lt;!&ndash;    <div class="troywell-avia"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="troywell-caa"></div>&ndash;&gt;-->
+<!--</html>-->

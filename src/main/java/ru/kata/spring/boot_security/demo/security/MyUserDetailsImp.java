@@ -1,29 +1,22 @@
 package ru.kata.spring.boot_security.demo.security;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.kata.spring.boot_security.demo.models.Role;
-import ru.kata.spring.boot_security.demo.models.User;
+import ru.kata.spring.boot_security.demo.model.User;
 
-import java.util.*;
+import java.util.Collection;
 
-//в этом классе обертке реализуем интерфейс UserDetails
-public class MyUserDetails implements UserDetails {
+public class MyUserDetailsImp implements UserDetails {
     private final User user;
 
-    public MyUserDetails(User user) {
+    public MyUserDetailsImp(User user) {
         this.user = user;
     }
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Преобразует объекты Role в объекты GrantedAuthority
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        for (Role role : user.getRoleSet()) {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
-        return authorities;
+   return this.user.getRoleSet();
     }
 
     @Override
