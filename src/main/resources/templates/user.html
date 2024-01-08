@@ -9,8 +9,6 @@
 </head>
 
 <body>
-
-<!--Верхняя панель. Кнопка Logout-->
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
         <form class="text-white">
@@ -22,15 +20,13 @@
     </div>
 </nav>
 
-<!-- Container -->
 <div class="container-fluid" style="padding-top: 20px">
     <div class="row">
 
-        <!-- Vertical panel -->
         <div class="col">
             <div class="row">
                 <button th:each="role: ${user.getRoleSet()}" th:if="${role.toString()}=='ROLE_ADMIN'"
-                        class="btn btn-link btn-lg btn-block; text-start" onclick="window.location.href = '/admin'" >
+                        class="btn btn-link btn-lg btn-block; text-start" onclick="window.location.href = '/admin'">
                     Admin
                 </button>
                 <button class="btn btn-primary btn-lg btn-block; text-start" onclick="window.location.href = '/user'">
@@ -39,11 +35,9 @@
             </div>
         </div>
 
-        <!-- User panel -->
         <div class="col-10 bg-light" style="padding-left: 20px">
             <h1>User information-page</h1>
 
-            <!-- Table -->
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">About user</h3>
@@ -65,7 +59,7 @@
                             <tbody>
                             <tr>
                                 <td th:text="*{id}"/>
-                                <td th:text="*{username}"/>
+                                <td th:text="*{firstName}"/>
                                 <td th:text="*{lastName}"/>
                                 <td th:text="*{age}"/>
                                 <td th:text="*{email}"/>
@@ -76,7 +70,6 @@
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

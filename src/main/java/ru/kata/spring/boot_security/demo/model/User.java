@@ -1,4 +1,3 @@
-
 package ru.kata.spring.boot_security.demo.model;
 
 import org.hibernate.annotations.Fetch;
@@ -32,7 +31,7 @@ public class User {
     @NotEmpty(message = "Введите имя")
     @Size(min = 1, max = 30, message = "Поле должно содержать от 1 до 30 символов")
     @Column(name = "first_name")
-    private String username;
+    private String firstName;
     @NotEmpty(message = "Введите фамилию")
     @Size(min = 2, max = 30, message = "Поле должно содержать от 2 до 30 символов")
     @Column(name = "last_name")
@@ -56,10 +55,11 @@ public class User {
     private Set<Role> roleSet = new HashSet<>();
 
     public User() {
+
     }
 
-    public User(String username, String lastName, int age, String email, String password) {
-        this.username = username;
+    public User(String firstName, String lastName, int age, String email, String password) {
+        this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.email = email;
@@ -82,12 +82,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public int getAge() {
@@ -124,7 +124,7 @@ public class User {
 
 
     public String rolesToString() {
-        return roleSet.stream().map(Role::getAuthority).collect(Collectors.joining(" "));
+        return roleSet.stream().map(Role::getAuthority).collect(Collectors.joining(" ")).replace("ROLE_", "");
     }
 
 
@@ -135,8 +135,9 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "age=" + age +
+                "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", age=" + age +
                 ", email='" + email + '\'' +
                 '}';
     }

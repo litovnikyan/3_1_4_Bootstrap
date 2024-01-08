@@ -15,6 +15,7 @@ public class DbInitializer {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    @Autowired
     public DbInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -32,7 +33,5 @@ public class DbInitializer {
 
         userRepository.save(admin);
         userRepository.save(user);
-
-
     }
 }
