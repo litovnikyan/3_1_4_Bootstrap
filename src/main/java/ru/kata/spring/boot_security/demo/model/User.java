@@ -17,6 +17,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import ru.kata.spring.boot_security.demo.models.Role;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
