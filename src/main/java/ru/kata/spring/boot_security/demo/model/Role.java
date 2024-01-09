@@ -1,17 +1,19 @@
-package ru.kata.spring.boot_security.demo.models;
+package ru.kata.spring.boot_security.demo.model;
 
 import org.springframework.security.core.GrantedAuthority;
-import ru.kata.spring.boot_security.demo.model.User;
 
+import java.util.Set;
+import java.util.HashSet;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
+import javax.persistence.Transient;
 import javax.persistence.ManyToMany;
-import java.util.Set;
-import java.util.HashSet;
+import javax.persistence.FetchType;
+
 
 @Entity
 @Table(name = "roles")
@@ -22,10 +24,11 @@ public class Role implements GrantedAuthority {
     @Column(name = "id")
     private int id;
 
+
     @Column(name = "name")
     private String name;
-
-    @ManyToMany(mappedBy = "roleSet")
+    @Transient
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roleSet")
     private Set<User> users = new HashSet<>();
 
     public Role() {
@@ -33,6 +36,11 @@ public class Role implements GrantedAuthority {
 
     public Role(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String getAuthority() {
+        return name;
     }
 
     public int getId() {
@@ -43,8 +51,7 @@ public class Role implements GrantedAuthority {
         this.id = id;
     }
 
-    @Override
-    public String getAuthority() {
+    public String getName() {
         return name;
     }
 

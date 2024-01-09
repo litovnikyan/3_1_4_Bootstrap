@@ -4,11 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.kata.spring.boot_security.demo.models.Role;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class UserServiceImp implements UserService {
     @Transactional
     public void saveUser(User user) {
         if (userRepository.findById(user.getId()).isPresent()) {
-            throw new EntityNotFoundException("Такой пользователь уже существует");
+            throw new EntityExistsException("Такой пользователь уже существует");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
@@ -84,9 +85,10 @@ public class UserServiceImp implements UserService {
         return roleRepository.findAll();
     }
 
+    @Override
+    @Transactional
+    public void addRole(Role role) {
+        roleRepository.save(role);
+    }
+
 }
-
-
-
-
-

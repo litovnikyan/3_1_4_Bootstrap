@@ -5,25 +5,25 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Id;
+import javax.persistence.UniqueConstraint;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.ManyToMany;
-import javax.persistence.CascadeType;
-import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import ru.kata.spring.boot_security.demo.models.Role;
+
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users",
+        uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {
     @Id
     @Column(name = "id")
@@ -49,7 +49,7 @@ public class User {
     @Column(name = "password")
     private String password;
     @Fetch(FetchMode.JOIN)
-    @ManyToMany(cascade = {CascadeType.REFRESH, CascadeType.MERGE,CascadeType.PERSIST})
+    @ManyToMany
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -65,6 +65,25 @@ public class User {
         this.age = age;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String firstName, String lastName, int age, String email, String password, Set<Role> roleSet) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.email = email;
+        this.password = password;
+        this.roleSet = roleSet;
+    }
+
+    public User(int id, String firstName, String lastName, int age, String email, String password, Set<Role> roleSet) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.email = email;
+        this.password = password;
+        this.roleSet = roleSet;
     }
 
     public Set<Role> getRoleSet() {
@@ -124,15 +143,6 @@ public class User {
     }
 
 
-    public String rolesToString() {
-        return roleSet.stream().map(Role::getAuthority).collect(Collectors.joining(" ")).replace("ROLE_", "");
-    }
-
-
-    public void setRoleSet(Role roleSet) {
-        this.roleSet.add(roleSet);
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -142,4 +152,5 @@ public class User {
                 ", email='" + email + '\'' +
                 '}';
     }
+
 }
